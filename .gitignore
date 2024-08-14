@@ -1,0 +1,14 @@
+**.DS_Store
+**.pyc
+.idea/**
+**.pt
+**.npz
+**.obj
+**.ipynb_checkpoints/
+**.ini
+**.json
+data/
+DNU/
+_DNU/
+output/
+

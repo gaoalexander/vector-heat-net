@@ -1,0 +1,16 @@
+libigl
+torch
+torch_geometric
+numpy
+scipy
+tqdm
+gpytoolbox
+potpourri3d
+scikit-learn
+openmesh
+robust_laplacian
+h5py
+tensorboard
+polyscope
+pymeshlab==2022.2.post3
+click
