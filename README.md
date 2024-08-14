@@ -1,11 +1,8 @@
 # An Intrinsic Vector Heat Network (ICML 2024)
 [Alexander Gao](https://gaoalexander.github.io/), [Maurice Chu](), [Mubbasir Kapadia](), [Ming C. Lin](), [Hsueh-Ti Derek Liu]()
-### [[Paper]](https://arxiv.org/abs/2406.09648) [[Project Page]](https://www.alexandergao.com/vector-heat-network/)
-___
+### [[Paper]](https://arxiv.org/abs/2406.09648) [[Project Page]](https://gaoalexander.github.io/vector-heat-network/)
 
-
-
-### NOTE: This is a research codebase partially based on the original [DiffusionNet](https://github.com/nmwsharp/diffusion-net) implementation. 
+#### Acknowledgement: This is a research codebase partially based on the original [DiffusionNet](https://github.com/nmwsharp/diffusion-net) and [DeltaConv](https://github.com/rubenwiersma/deltaconv) implementations.  We thank the authors for their works and open source code, which we have been able to build our own work upon.
 
 # Setup
 PyTorch training code will run on CUDA backend if it is available, otherwise will revert to CPU.  MPS backend on MacOS is not available, as sparse tensor operations are not officially supported.
