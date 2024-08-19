@@ -1,5 +1,5 @@
 # An Intrinsic Vector Heat Network (ICML 2024)
-[Alexander Gao](https://gaoalexander.github.io/), [Maurice Chu](), [Mubbasir Kapadia](), [Ming C. Lin](), [Hsueh-Ti Derek Liu]()
+[Alexander Gao](https://gaoalexander.github.io/), [Maurice Chu](https://www.linkedin.com/in/maurice-chu-1ab3731a/), [Mubbasir Kapadia](https://scholar.google.com/citations?user=xhkzmycAAAAJ&hl=en/), [Ming C. Lin](https://www.cs.umd.edu/~lin/), [Hsueh-Ti Derek Liu](https://www.dgp.toronto.edu/~hsuehtil/)
 ### [[Paper]](https://arxiv.org/abs/2406.09648) [[Project Page]](https://gaoalexander.github.io/vector-heat-network/)
 
 #### Acknowledgement: This is a research codebase partially based on the original [DiffusionNet](https://github.com/nmwsharp/diffusion-net) and [DeltaConv](https://github.com/rubenwiersma/deltaconv) implementations.  We thank the authors for their works and open source code, which we have been able to build our own work upon.
@@ -29,6 +29,10 @@ Model checkpoints and test output are saved in the `experiments/quad_meshing/out
 ```
 python experiments/quad_meshing/inference.py --pretrain-path <path/to/output/run/dir>
 ```
+
+### Extract quadrilateral meshes from inferred vector field
+See the [cpp_mesh_extraction](experiments/quad_meshing/cpp_mesh_extraction/README.md) module for additional information on extracting a quadrilateral mesh from the predicted cross field. 
+
 # Data
 ### Creating a custom dataset for quadrilateral meshing
 ```
