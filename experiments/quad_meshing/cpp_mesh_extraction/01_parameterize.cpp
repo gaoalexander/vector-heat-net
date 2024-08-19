@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
   using namespace Eigen;
 
   // Load a mesh in OBJ format
-  igl::readOBJ(TUTORIAL_SHARED_PATH "/octopus_10x.obj", V, F);
+  igl::readOBJ(argv[1], V, F);
 
   // Compute face barycenters
   igl::barycenter(V, F, B);
@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
 
   // Load constraints
   MatrixXd temp;
-  igl::readDMAT(TUTORIAL_SHARED_PATH "/octopus_10x.dmat",temp);
+  igl::readDMAT(argv[2],temp);
 
   b   = temp.block(0,0,temp.rows(),1).cast<int>();
   bc1 = temp.block(0,1,temp.rows(),3);
@@ -211,7 +211,7 @@ int main(int argc, char *argv[])
   igl::frame_field_deformer(
     V,F,FF1,FF2,V_deformed,FF1_deformed,FF2_deformed);
 
-  igl::writeOBJ(TUTORIAL_SHARED_PATH "/octopus_10x_deformed.obj", V_deformed, F);
+  igl::writeOBJ(str.replace(argv[1].find(".obj"), ".obj".length(), "_deformed.obj");, V_deformed, F);
 
   // Compute face barycenters deformed mesh
   igl::barycenter(V_deformed, F, B_deformed);
@@ -242,7 +242,7 @@ int main(int argc, char *argv[])
 
   Eigen::MatrixXd nullmat;
   Eigen::MatrixXi nullmat2;
-  igl::writeOBJ(TUTORIAL_SHARED_PATH "/octopus_10x_parametrized.obj", V, F, nullmat, nullmat2, V_uv, F_uv);
+  igl::writeOBJ(str.replace(argv[1].find(".obj"), ".obj".length(), "_parameterized.obj"), V, F, nullmat, nullmat2, V_uv, F_uv);
 
   igl::opengl::glfw::Viewer viewer;
   // Plot the original mesh with a texture parametrization
