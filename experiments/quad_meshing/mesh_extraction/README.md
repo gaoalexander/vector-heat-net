@@ -3,7 +3,7 @@
 ### Setup
 The following process depends on installing [LibIGL](https://github.com/libigl/libigl) and [LibQEx](https://github.com/hcebke/libQEx).
 
-Once those dependencies have been installed, compile `01_parametrize.cpp` and `02_extract_quads.cpp`.
+Once those dependencies have been installed, compile `cpp/01_parametrize.cpp` and `cpp/02_extract_quads.cpp` into binaries.
 
 ### Usage:
 We first need to convert the inferred vector field (`.json`) to a format that is easily readable by LibIGL (`.dmat`):
