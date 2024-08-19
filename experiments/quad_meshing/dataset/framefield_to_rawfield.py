@@ -1,16 +1,8 @@
 import json
-from pathlib import Path
-
-import click
 import numpy as np
 import potpourri3d as pp3d
+from pathlib import Path
 from tqdm import tqdm
-
-
-@click.group()
-def cli():
-    """Command-line tools for retopo experiments"""
-    pass
 
 
 def compute_local_axes_triplanar(verts, faces):
@@ -192,8 +184,8 @@ def make_triplanes_consistent(global_directions, axis_n):
     for i in range(len(global_directions)):
         for j in range(3):
             if j != best_plane_idx[i]:
-                global_directions[i, j * 6 : j * 6 + 6] = make_vectors_consistent(
-                    best_directions[i, :], global_directions[i, j * 6 : j * 6 + 6]
+                global_directions[i, j * 6: j * 6 + 6] = make_vectors_consistent(
+                    best_directions[i, :], global_directions[i, j * 6: j * 6 + 6]
                 )
     return global_directions
 
@@ -221,30 +213,30 @@ def get_frame_fields_global_coord(pred_directions, axis_x_list, axis_y_list):
     # pred_directions = np.array(pred_directions)
     print(pred_directions.shape)
     global_yz_u = (
-        np.expand_dims(pred_directions[:, 0], axis=1) * axis_x_list[0]
-        + np.expand_dims(pred_directions[:, 1], axis=1) * axis_y_list[0]
+            np.expand_dims(pred_directions[:, 0], axis=1) * axis_x_list[0]
+            + np.expand_dims(pred_directions[:, 1], axis=1) * axis_y_list[0]
     )
     global_yz_v = (
-        np.expand_dims(pred_directions[:, 2], axis=1) * axis_x_list[0]
-        + np.expand_dims(pred_directions[:, 3], axis=1) * axis_y_list[0]
+            np.expand_dims(pred_directions[:, 2], axis=1) * axis_x_list[0]
+            + np.expand_dims(pred_directions[:, 3], axis=1) * axis_y_list[0]
     )
 
     global_xz_u = (
-        np.expand_dims(pred_directions[:, 4], axis=1) * axis_x_list[1]
-        + np.expand_dims(pred_directions[:, 5], axis=1) * axis_y_list[1]
+            np.expand_dims(pred_directions[:, 4], axis=1) * axis_x_list[1]
+            + np.expand_dims(pred_directions[:, 5], axis=1) * axis_y_list[1]
     )
     global_xz_v = (
-        np.expand_dims(pred_directions[:, 6], axis=1) * axis_x_list[1]
-        + np.expand_dims(pred_directions[:, 7], axis=1) * axis_y_list[1]
+            np.expand_dims(pred_directions[:, 6], axis=1) * axis_x_list[1]
+            + np.expand_dims(pred_directions[:, 7], axis=1) * axis_y_list[1]
     )
 
     global_xy_u = (
-        np.expand_dims(pred_directions[:, 8], axis=1) * axis_x_list[2]
-        + np.expand_dims(pred_directions[:, 9], axis=1) * axis_y_list[2]
+            np.expand_dims(pred_directions[:, 8], axis=1) * axis_x_list[2]
+            + np.expand_dims(pred_directions[:, 9], axis=1) * axis_y_list[2]
     )
     global_xy_v = (
-        np.expand_dims(pred_directions[:, 10], axis=1) * axis_x_list[2]
-        + np.expand_dims(pred_directions[:, 11], axis=1) * axis_y_list[2]
+            np.expand_dims(pred_directions[:, 10], axis=1) * axis_x_list[2]
+            + np.expand_dims(pred_directions[:, 11], axis=1) * axis_y_list[2]
     )
 
     frame_fields = np.concatenate(
@@ -280,21 +272,6 @@ def write_dmat_file(dmat_outpath, u, v):
         f.writelines(lines)
 
 
-@click.command()
-@click.option(
-    "--inference-json-path",
-    "-j",
-    type=click.Path(exists=True, dir_okay=False),
-    required=True,
-    help="Path to JSON model output, containing the predicted frame field.",
-)
-@click.option(
-    "--source-obj-path",
-    "-s",
-    type=click.Path(exists=True, dir_okay=False),
-    required=True,
-    help="Path to OBJ model of input triangle mesh.",
-)
 def convert_to_dmat(inference_json_path, source_obj_path):
     source_obj_file, inference_data_file = Path(source_obj_path), Path(
         inference_json_path
@@ -321,19 +298,31 @@ def convert_to_dmat(inference_json_path, source_obj_path):
     frame_fields = make_triplanes_consistent(frame_fields, axis_n)
 
     u = (
-        frame_fields[:, 0:3] * weight_yz
-        + frame_fields[:, 6:9] * weight_xz
-        + frame_fields[:, 12:15] * weight_xy
+            frame_fields[:, 0:3] * weight_yz
+            + frame_fields[:, 6:9] * weight_xz
+            + frame_fields[:, 12:15] * weight_xy
     )
     v = (
-        frame_fields[:, 3:6] * weight_yz
-        + frame_fields[:, 9:12] * weight_xz
-        + frame_fields[:, 15:18] * weight_xy
+            frame_fields[:, 3:6] * weight_yz
+            + frame_fields[:, 9:12] * weight_xz
+            + frame_fields[:, 15:18] * weight_xy
     )
 
     write_dmat_file(dmat_outpath, u, v)
 
 
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--inference-json-path",
+                        type=str,
+                        help="Path to JSON model output, containing the predicted frame field.")
+    parser.add_argument("--source-obj-path",
+                        type=str,
+                        help="Path to OBJ model of input triangle mesh.",
+                        )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    cli.add_command(convert_to_dmat)
-    cli()
+    args = get_args()
+    convert_to_dmat(args.inference_json_path, args.source_obj_path)
