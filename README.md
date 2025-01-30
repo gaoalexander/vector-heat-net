@@ -32,7 +32,7 @@ python experiments/quad_meshing/inference.py --pretrain-path <path/to/output/run
 This will output the results as a JSON file `output.json`.
 
 ### Quadrilateral mesh extraction
-See the [cpp_mesh_extraction](experiments/quad_meshing/cpp_mesh_extraction/README.md) module for additional information on extracting a quadrilateral mesh from the predicted cross field. 
+See the [cpp_mesh_extraction](experiments/quad_meshing/mesh_extraction/README.md) module for additional information on extracting a quadrilateral mesh from the predicted cross field. 
 
 # Data
 ### Creating a custom dataset for quadrilateral meshing
