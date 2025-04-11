@@ -43,7 +43,6 @@ def get_vertex_one_rings(verts, faces):
         mask = np.where(one_ring_verts != -1)
         one_ring_verts = one_ring_verts[mask]
         one_ring_vertices.append(one_ring_verts)
-        print(vert_idx, one_ring_verts)
 
         edges = verts[one_ring_verts] - verts[vert_idx]
         normalized_edges = edges / np.linalg.norm(edges, axis=-1)[:, None]

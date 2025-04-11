@@ -27,7 +27,7 @@ python experiments/quad_meshing/train.py --dataset_path experiments/quad_meshing
 Model checkpoints and test output are saved in the `experiments/quad_meshing/output` directory.
 ### Inference
 ```
-python experiments/quad_meshing/inference.py --pretrain-path <path/to/output/run/dir>
+python experiments/quad_meshing/inference.py --pretrain_path <path/to/model/checkpoint.pth> --dataset_path experiments/quad_meshing/data/example_quadwild
 ```
 This will output the results as a JSON file `output.json`.
 

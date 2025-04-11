@@ -19,6 +19,9 @@ import robust_laplacian
 import potpourri3d as pp3d
 
 import openmesh as om
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # add the path to the DiffusionNet src
+
 import vector_heat_net.utils as utils
 from vector_heat_net.connection_laplacian.connection_laplacian import connection_laplacian
 from vector_heat_net.connection_laplacian.build_vertex_gradient_operator import build_vertex_gradient_operator

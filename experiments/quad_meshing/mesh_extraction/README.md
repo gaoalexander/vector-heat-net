@@ -8,7 +8,7 @@ Once those dependencies have been installed, compile `cpp/01_parametrize.cpp` an
 ### Usage:
 We first need to convert the inferred vector field (`.json`) to a format that is easily readable by LibIGL (`.dmat`):
 ```
-python experiments/quad_meshing/dataset/framefield_to_rawfield.py <path/to/inference_output.json> <path/to/source_mesh.obj>
+python experiments/quad_meshing/mesh_extraction/framefield_to_rawfield.py --inference_json_path <path/to/inference_output.json> --source_obj_path <path/to/source_mesh.obj>
 ```
 
 Then, guided by the vector field (which is now in `.dmat` format), we use IGL to deform and compute a 2D parameterization of the input mesh.  This step will output a file in the same directory as the input mesh, with extension `<meshname>_parameterized.obj`:
